@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AlumnoController;
+use App\Http\Controllers\ProfesorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,37 +17,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect("/home");
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('miscursos', function(){
-    return "Bienvenido a la pagina cursos";
-});
-Route::get('/categorias',function(){
-    return "Bienvenido a la pagina categorias";
-});
-Route::get('/nosotros',function(){
-    return "Bienvenido a la nosotros";
-});
-Route::get('/enseñacurso',function(){
-    return "Bienvenido a la pagina para ser docente";
-});
-Route::get('/desarrollo',function(){
-    return "Bienvenido a la categoria desarrollo";
-});
-Route::get('/negocios',function(){
-    return "Bienvenido a la categoria negocios";
-});
-Route::get('/software',function(){
-    return "Bienvenido a la categoria sotware";
-});
-Route::get('/diseño',function(){
-    return "Bienvenido a la categoria diseño";
-});
-Route::get('/marketing',function(){
-    return "Bienvenido a la categoria marketing";
+
+
+Route::middleware(["auth", "role:profesor"])->group(function() {
+    Route::get("/teacher_dashboard", [ProfesorController::class, "home"])->name("teacher.dashboard");
 });
 
+Route::middleware(["auth", "role:admin"])->group(function() {
+    Route::get("/admin_dashboard", [AdminController::class, "home"])->name("admin.dashboard");
+});
+
+Route::middleware(["auth", "role:alumno"])->group(function() {
+    Route::get("/alumno_dashboard", [AlumnoController::class, "home"])->name("alumno.dashboard");
+});
