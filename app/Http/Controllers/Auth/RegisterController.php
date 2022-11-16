@@ -56,7 +56,7 @@ class RegisterController extends Controller
             "apellido" => ['required', 'string'],
             "Dirección" => ["required", "string"],
             "telefono" => ["required", "string"],
-            "role_id" => ["role_id"],
+            "role_id" => ["required"],
         ]);
     }
 
