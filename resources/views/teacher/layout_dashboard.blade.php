@@ -54,9 +54,13 @@
         <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li> -->
         <!-- Cards -->
         <li class="menu-item">
-            <a href="{{route('admin.categorias')}}" class="menu-link">
+            <a href="{{route('profesor.cursos')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Basic">Categorias</div>
+                <div data-i18n="Basic">Cursos</div>
+            </a>
+            <a href="{{route('profesor.secciones')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Secciones</div>
             </a>
         </li>
     </ul>

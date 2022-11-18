@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class CurseCategory extends Model
 {
     use HasFactory;
-    protected $table = 'sections';
+    protected $table = 'course_category';
 }

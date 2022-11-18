@@ -16,7 +16,7 @@ class Roles
      */
     public function handle(Request $request, Closure $next, string $role)
     {
-        if (!$request->user()->getRole() == $role) 
+        if (auth()->user()->getRole() != $role) 
         {
             return back();
         }

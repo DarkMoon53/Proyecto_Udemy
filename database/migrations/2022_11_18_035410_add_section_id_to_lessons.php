@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('lessons', function (Blueprint $table) {
-            $table->id();
-            $table->string("Nombre",50)->nullable(false);
-            $table->string("ruta", 100)->nullable();
-            $table->string("Tiempo",20)->nullable(false);
-            $table->timestamps();
+        Schema::table('lessons', function (Blueprint $table) {
+            $table->unsignedBigInteger("id_seccion");
+            $table->foreign("id_seccion")->references("id")->on("sections");
         });
     }
 
@@ -29,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lessons');
+        Schema::table('lessons', function (Blueprint $table) {
+           $table->dropForeign("lessons_id_seccion_foreign");
+           $table->dropColumn("id_seccion");
+        });
     }
 };

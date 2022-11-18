@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string("Nombre",50)->nullable(false);
             $table->string("Descripcion",200)->nullable(false);
             $table->float("Precio")->nullable(false);
-            $table->string("FechaCreacion",20)->nullable(false);
-            $table->string("FechaActualización",20)->nullable(false);
-            $table->string("Idiomta",20)->nullable(false);
+            $table->string("Idioma",20)->nullable(false);
             $table->string("Requisitos",200)->nullable(false);
             $table->string("Objetivos",500)->nullable(false);
             $table->boolean("Estado")->default(1);  
