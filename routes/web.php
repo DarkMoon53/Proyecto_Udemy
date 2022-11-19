@@ -7,6 +7,7 @@ use App\Http\Controllers\CursosController;
 use App\Http\Controllers\LeccionesController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\SeccionesController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', 
+[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/cursos', 
+[App\Http\Controllers\CursosController::class, 'index'])->name('cursos');
+Route::post('/cursos', 
+[App\Http\Controllers\CursosController::class, 'verCursosPorCategoria'])->name('cursos.categoria');
+Route::get("/curso/comprar/{id_curso}", [VentaController::class, "comprarCursoMiddleware"])->name("curso.comprar");
 
 Route::middleware(["auth", "role:admin"])->group(function () {
     Route::get("/admin_dashboard", 
@@ -95,4 +102,15 @@ Route::middleware(["auth", "role:profesor"])->group(function () {
 
 Route::middleware(["auth", "role:alumno"])->group(function () {
     Route::get("/alumno_dashboard", [AlumnoController::class, "home"])->name("alumno.dashboard");
+
+    Route::get("alumno/curso/comprar/{id_curso}", [VentaController::class, "comprarCurso"])->name("alumno.comprar_curso");
+    Route::post("alumno/curso/comprar", [VentaController::class, "procesarCompraCurso"])->name("alumno.procesarCompra_curso");
+
+    Route::get("alumno/cursos", [AlumnoController::class, "cursos"])->name("alumno.cursos");
+    Route::post("alumno/cursos", [AlumnoController::class, "cursosPorCategoria"])->name("alumno.cursos_categoria");
+    Route::get("alumno/miscursos", [AlumnoController::class, "misCursos"])->name("alumno.miscursos");
+
+    Route::get("alumno/miscursos/secciones/{id_curso}", [AlumnoController::class, "iniciarSecciones"])->name("alumno.miscursos_secciones");
+    Route::get("alumno/miscursos/secciones/lecciones/{id_seccion}", [AlumnoController::class, "iniciarLecciones"])->name("alumno.miscursos_lecciones");
+    Route::get("alumno/miscursos/secciones/lecciones/ver/{id_leccion}", [AlumnoController::class, "verLeccion"])->name("alumno.miscursos_ver_leccion");
 });

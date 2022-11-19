@@ -21,7 +21,8 @@ return new class extends Migration
             $table->string("Idioma",20)->nullable(false);
             $table->string("Requisitos",200)->nullable(false);
             $table->string("Objetivos",500)->nullable(false);
-            $table->boolean("Estado")->default(1);  
+            $table->boolean("Estado")->default(1);
+            $table->integer("id_profesor");
             $table->timestamps();
         });
     }

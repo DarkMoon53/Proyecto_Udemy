@@ -8,12 +8,39 @@ use App\Models\CurseSection;
 use App\Models\Grade;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CursosController extends Controller
 {
+    public function index()
+    {
+        $categorias = Category::all();
+        $idCategoria = 0;
+        $cursos = Grade::all();
+        return view("home", compact("categorias", "cursos", "idCategoria"));
+    }
+
+    public function verCursosPorCategoria(Request $request)
+    {
+        $categorias = Category::all();
+        $idCategoria = $request->input("id_categoria");
+
+        if ($idCategoria == 0) {
+            $cursos = Grade::all();
+        } else {
+            $cursos = DB::table("grades")
+                ->join("course_category", "grades.id", "=", "course_category.id_curso")
+                ->where("course_category.id_categoria", "=", $idCategoria)
+                ->select("grades.*")
+                ->get();
+        }
+
+        return view("home", compact("categorias", "cursos", "idCategoria"));
+    }
+
     public function cursos()
     {
-        $cursos = Grade::all();
+        $cursos = Grade::where("id_profesor", auth()->user()->id);
         return view("teacher.cursos", compact("cursos"));
     }
 
@@ -53,6 +80,7 @@ class CursosController extends Controller
         $curso->Idioma = $request->input("Idioma");
         $curso->Requisitos = $request->input("Requisitos");
         $curso->Objetivos = $request->input("Objetivos");
+        $curso->id_profesor = auth()->user()->id;
         $curso->save();
 
         $curseCategory = new CurseCategory();
@@ -114,8 +142,7 @@ class CursosController extends Controller
     {
         $curse_section = CurseSection::where("id_curso", $idCurso)->get();
 
-        if (count($curse_section) > 0) 
-        {
+        if (count($curse_section) > 0) {
             return redirect()->back()->with('error', "No se puede eliminar curso ya que este cuenta con secciones");
         }
         CurseCategory::where("id_curso", $idCurso)->delete();

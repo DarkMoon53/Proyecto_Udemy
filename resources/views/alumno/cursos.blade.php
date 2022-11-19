@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('alumno.layout_dashboard')
 
-@section('content')
+@section('contentwraper')
 <div class="row w-100">
-    <div class="mb-4 ms-5 me-5 d-flex justify-content-start">
-        <form action="{{route('cursos.categoria')}}" method="post" class="d-flex justify-content-between">
+    <div class="mb-4 ms-5 me-5 d-flex justify-content-start mt-3">
+        <form action="{{route('alumno.cursos_categoria')}}" method="post" class="d-flex justify-content-between">
             @csrf
             <select class="form-select" aria-label="Default select example" name="id_categoria">
                 <option value="0" selected>Todos</option>
@@ -57,7 +57,7 @@
                         <i class="fa fa-star star"></i>
                     </div>
 
-                    <a href="{{route('curso.comprar', $cur->id)}}">
+                    <a href="{{route('alumno.comprar_curso', $cur->id)}}">
                         <button type="button" class="btn bg-cart"><i class="fa fa-cart-plus mr-2"></i> Comprar</button>
                     </a>
                 </div>
