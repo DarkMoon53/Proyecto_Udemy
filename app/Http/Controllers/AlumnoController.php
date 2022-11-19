@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlumnoCurso;
 use App\Models\Category;
 use App\Models\Grade;
 use App\Models\Lesson;
@@ -81,5 +82,12 @@ class AlumnoController extends Controller
     {
         $leccion = Lesson::where("id", $idLeccion)->first();
         return view("alumno.ver_leccion", compact("leccion"));
+    }
+
+    public function darBajaCurso(Request $request)
+    {
+        $idCurso = $request->input("id_curso");
+        AlumnoCurso::where("id_curso", $idCurso)->delete();
+        return redirect()->back()->with("success", "Curso dado de baja correctamente");
     }
 }

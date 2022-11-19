@@ -108,6 +108,7 @@ Route::middleware(["auth", "role:alumno"])->group(function () {
 
     Route::get("alumno/cursos", [AlumnoController::class, "cursos"])->name("alumno.cursos");
     Route::post("alumno/cursos", [AlumnoController::class, "cursosPorCategoria"])->name("alumno.cursos_categoria");
+    Route::delete("alumno/curso", [AlumnoController::class, "darBajaCurso"])->name("alumno.darbaja_curso");
     Route::get("alumno/miscursos", [AlumnoController::class, "misCursos"])->name("alumno.miscursos");
 
     Route::get("alumno/miscursos/secciones/{id_curso}", [AlumnoController::class, "iniciarSecciones"])->name("alumno.miscursos_secciones");

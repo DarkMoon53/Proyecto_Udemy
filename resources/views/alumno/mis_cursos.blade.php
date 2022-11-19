@@ -39,9 +39,10 @@
                                 <a href="{{route('alumno.miscursos_secciones', $c->id)}}">
                                     <button type="submit" class="btn btn-primary btn-sm me-2" style="width:60px;">iniciar</button>
                                 </a>
-                                <form method="post" action="">
+                                <form method="post" action="{{route('alumno.darbaja_curso')}}">
                                     @method('delete')
                                     @csrf
+                                    <input type="hidden" value="{{$c->id}}" name="id_curso">
                                     <button type="submit" class="btn btn-danger btn-sm" style="width:90px;">dar de baja</button>
                                 </form>
                             </div>
