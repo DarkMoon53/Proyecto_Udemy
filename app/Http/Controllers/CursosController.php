@@ -40,7 +40,7 @@ class CursosController extends Controller
 
     public function cursos()
     {
-        $cursos = Grade::where("id_profesor", auth()->user()->id);
+        $cursos = Grade::where("id_profesor", auth()->user()->id)->get();
         return view("teacher.cursos", compact("cursos"));
     }
 
