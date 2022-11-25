@@ -52,6 +52,11 @@ Route::middleware(["auth", "role:admin"])->group(function () {
     [CategoriaController::class, "editarCategoria"])->name("admin.editar_categoria");
     Route::put("/admin/categoria",
     [CategoriaController::class, "guardarEditCategoria"])->name("admin.guardarEdit_categoria");
+
+    Route::get("admin/configurar", [UsuarioController::class, "configurarCuenta"])
+    ->name("admin.configurar_cuenta");
+    Route::post("admin/configurar", [UsuarioController::class, "procesarConfigurarCuenta"])
+    ->name("admin.procesar_configurar_cuenta");
 });
 
 Route::middleware(["auth", "role:profesor"])->group(function () {
