@@ -34,7 +34,7 @@
                 <div class="card-body">
                     <div class="card-img-actions">
 
-                        <img src="{{URL::asset('img/general.jpg')}}" class="card-img img-fluid" width="96" height="350" alt="">
+                        <img src='{{URL::asset("images/$cur->img")}}' class="card-img img-fluid" width="96" height="350" alt="">
 
 
                     </div>
