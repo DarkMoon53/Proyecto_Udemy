@@ -15,7 +15,7 @@ class SeccionesController extends Controller
 
     public function secciones(Request $request)
     {
-        $cursos = Grade::all();
+        $cursos = Grade::where("id_profesor", auth()->user()->id)->get();
         $idCurso = $this->idCurso;
         return view("teacher.secciones", compact("cursos", "idCurso"));
     }

@@ -62,6 +62,10 @@
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Secciones</div>
             </a>
+            <a href="{{route('profesor.alumnos')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Alumnos</div>
+            </a>
         </li>
     </ul>
 </aside>
