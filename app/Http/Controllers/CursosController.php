@@ -6,7 +6,9 @@ use App\Models\Category;
 use App\Models\CurseCategory;
 use App\Models\CurseSection;
 use App\Models\Grade;
+use App\Models\Lesson;
 use App\Models\Section;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -148,5 +150,40 @@ class CursosController extends Controller
         CurseCategory::where("id_curso", $idCurso)->delete();
         Grade::where("id", $idCurso)->delete();
         return redirect()->back()->with("success", "Curso eliminado correctamente");
+    }
+
+    public function verCursoIndividual(Request $request, $idCurso)
+    {
+        $curso = Grade::where("id", $idCurso)->first();
+        $profesor = User::where("id", $curso->id_profesor)->first();
+        $secciones = DB::table("sections")
+        ->join("course_sections", "sections.id", "=", "course_sections.id_seccion")
+        ->where("course_sections.id_curso", "=", $curso->id)
+        ->select("sections.*")
+        ->get();
+
+        foreach($secciones as $sec)
+        {
+            $sec->lecciones = Lesson::where("id_seccion", $sec->id)->get();
+        }
+    
+        return view("alumno.ver_curso", compact("curso", "profesor", "secciones"));
+    }
+
+    public function verCursoGeneral(Request $request, $idCurso)
+    {
+        $curso = Grade::where("id", $idCurso)->first();
+        $profesor = User::where("id", $curso->id_profesor)->first();
+        $secciones = DB::table("sections")
+        ->join("course_sections", "sections.id", "=", "course_sections.id_seccion")
+        ->where("course_sections.id_curso", "=", $curso->id)
+        ->select("sections.*")
+        ->get();
+
+        foreach($secciones as $sec)
+        {
+            $sec->lecciones = Lesson::where("id_seccion", $sec->id)->get();
+        }
+        return view("ver_curso", compact("curso", "profesor", "secciones"));
     }
 }

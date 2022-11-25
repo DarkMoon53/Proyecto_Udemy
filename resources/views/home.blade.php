@@ -43,7 +43,7 @@
                 <div class="card-body bg-light text-center">
                     <div class="mb-2">
                         <h6 class="font-weight-semibold mb-2">
-                            <a href="#" class="text-default mb-2" data-abc="true">{{$cur->Nombre}}</a>
+                            <a href="{{route('ver_curso_general', $cur->id)}}" class="text-default mb-2" data-abc="true">{{$cur->Nombre}}</a>
                         </h6>
                         <p class="tex">{{$cur->Descripcion}}</a>
                     </div>
