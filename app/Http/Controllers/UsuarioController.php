@@ -21,7 +21,7 @@ class UsuarioController extends Controller
                 return view("alumno.configurar_cuenta", compact("usuario"));
                 break;
             case 'profesor':
-                return view("profesor.configurar_cuenta", compact("usuario"));
+                return view("teacher.configurar_cuenta", compact("usuario"));
                 break;
         }
     }

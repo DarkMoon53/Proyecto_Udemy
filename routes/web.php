@@ -100,6 +100,11 @@ Route::middleware(["auth", "role:profesor"])->group(function () {
     [LeccionesController::class, "procesarEditarLeccion"])->name("profesor.procesarEditar_leccion");
     Route::get("/profesor/seccion/leccion/ver/{id_leccion}",
     [LeccionesController::class, "verLeccion"])->name("profesor.ver_leccion");
+
+    Route::get("profesor/configurar", [UsuarioController::class, "configurarCuenta"])
+    ->name("profesor.configurar_cuenta");
+    Route::post("profesor/configurar", [UsuarioController::class, "procesarConfigurarCuenta"])
+    ->name("profesor.procesar_configurar_cuenta");
 });
 
 Route::middleware(["auth", "role:alumno"])->group(function () {

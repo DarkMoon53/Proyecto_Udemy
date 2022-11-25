@@ -107,13 +107,7 @@
                             <div class="dropdown-divider"></div>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="bx bx-user me-2"></i>
-                                <span class="align-middle">Mi Perfil</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{route('profesor.configurar_cuenta')}}">
                                 <i class="bx bx-cog me-2"></i>
                                 <span class="align-middle">Configuración</span>
                             </a>
