@@ -58,6 +58,11 @@
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Categorias</div>
             </a>
+
+            <a href="{{route('admin.usuarios')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Usuarios</div>
+            </a>
         </li>
     </ul>
 </aside>

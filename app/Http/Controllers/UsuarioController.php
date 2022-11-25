@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
+    
     public function configurarCuenta()
     {
         $role = Auth::user()->role->Nombre;

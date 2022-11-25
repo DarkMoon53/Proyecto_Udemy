@@ -57,6 +57,13 @@ Route::middleware(["auth", "role:admin"])->group(function () {
     ->name("admin.configurar_cuenta");
     Route::post("admin/configurar", [UsuarioController::class, "procesarConfigurarCuenta"])
     ->name("admin.procesar_configurar_cuenta");
+
+    Route::get("admin/usuarios", [AdminController::class, "listarUsuarios"])
+    ->name("admin.usuarios");
+    Route::post("admin/usuarios/darBaja", [AdminController::class, "darBajaUsuario"])
+    ->name("admin.dar_baja_usuario");
+    Route::post("admin/usuarios/activar", [AdminController::class, "activarUsuario"])
+    ->name("admin.activar_usuario");
 });
 
 Route::middleware(["auth", "role:profesor"])->group(function () {
