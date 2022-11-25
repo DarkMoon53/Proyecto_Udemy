@@ -66,6 +66,10 @@
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Alumnos</div>
             </a>
+            <a href="{{route('profesor.cursos_mas_vendidos')}}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Cursos Mas Vendidos</div>
+            </a>
         </li>
     </ul>
 </aside>

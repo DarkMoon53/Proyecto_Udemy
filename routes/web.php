@@ -122,6 +122,9 @@ Route::middleware(["auth", "role:profesor"])->group(function () {
     ->name("profesor.alumnos");
     Route::post("profesor/alumnos", [ProfesorController::class, "mostrarAlumnos"])
     ->name("profesor.mostrar_alumnos");
+
+    Route::get("profesor/ventas", [ProfesorController::class, "verCursosMasVendidos"])
+    ->name("profesor.cursos_mas_vendidos");
 });
 
 Route::middleware(["auth", "role:alumno"])->group(function () {
