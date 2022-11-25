@@ -13,7 +13,7 @@
                     {{ Session::get('success') }}
                 </div>
                 @endif
-                <form action="{{route('profesor.registrar_curso')}}" method="post">
+                <form action="{{route('profesor.registrar_curso')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Categoria</label>
@@ -21,9 +21,14 @@
                             @forelse ($categorias as $c)
                             <option value="{{$c->id}}">{{$c->Nombre}}</option>
                             @empty
-                            <option value="">No hay Cursos registrados</option>
+                            <option value="">No hay Categorias registrados</option>
                             @endforelse
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">imagen</label>
+                        <input type="file" class="form-control" id="exampleFormControlInput1" name="img" value="{{old('img')}}">
                     </div>
 
                     <div class="mb-3">

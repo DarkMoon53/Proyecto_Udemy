@@ -26,6 +26,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col">img</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Desripción</th>
                         <th scope="col">Precio</th>
@@ -39,6 +40,14 @@
                     @forelse ($cursos as $c)
                     <tr>
                         <th scope="row">{{$c->id}}</th>
+                        <th scope="row">
+                            @if($c->img != null)
+                            <img src="{{URL::asset("images/$c->img")}}" alt="" width="100">
+                            @else
+                            <img src="{{URL::asset("img/general.jpg")}}" alt="" width="100">
+                            @endif
+
+                        </th>
                         <td>{{$c->Nombre}}</td>
                         <td>{{$c->Descripcion}}</td>
                         <td>{{$c->Precio}}</td>

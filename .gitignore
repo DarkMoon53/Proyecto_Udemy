@@ -4,6 +4,7 @@
 /public/videos
 /public/storage
 /storage/*.key
+/public/images/*
 /vendor
 .env
 .env.backup

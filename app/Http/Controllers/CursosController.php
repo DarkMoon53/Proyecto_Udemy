@@ -11,6 +11,7 @@ use App\Models\Section;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CursosController extends Controller
 {
@@ -63,6 +64,7 @@ class CursosController extends Controller
                 "Idioma" => "required",
                 "Requisitos" => "required",
                 "Objetivos" => "required",
+                "img" => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
             ],
             [
                 "id_categoria.required" => "La categoría es requerida",
@@ -72,6 +74,7 @@ class CursosController extends Controller
                 "Idioma.required" => "El idioma es requerido",
                 "Requisitos.required" => "Los requisitos es requerido",
                 "Objetivos.required" => "La ojetivos es requerido",
+                "img.required" => "Seleccione suna imagen porfavor"
             ]
         );
 
@@ -83,6 +86,12 @@ class CursosController extends Controller
         $curso->Requisitos = $request->input("Requisitos");
         $curso->Objetivos = $request->input("Objetivos");
         $curso->id_profesor = auth()->user()->id;
+        $curso->save();
+
+        $imageName = $curso->id.'.'.$request->img->extension();  
+        $request->img->move(public_path('images'), $imageName);
+
+        $curso->img = $imageName;
         $curso->save();
 
         $curseCategory = new CurseCategory();
@@ -133,6 +142,15 @@ class CursosController extends Controller
         $curso->Objetivos = $request->input("Objetivos");
         $curso->save();
 
+        if ($request->img)
+        {
+            File::delete(public_path("images") . "/". $curso->img);
+            $imageName = $curso->id.'.'.$request->img->extension();  
+            $request->img->move(public_path('images'), $imageName);
+            $curso->img = $imageName;
+            $curso->save();
+        }
+
         $curseCategory = CurseCategory::where("id_curso", $curso->id)->first();
         $curseCategory->id_categoria = (int)$request->input("id_categoria");
         $curseCategory->save();
@@ -148,7 +166,9 @@ class CursosController extends Controller
             return redirect()->back()->with('error', "No se puede eliminar curso ya que este cuenta con secciones");
         }
         CurseCategory::where("id_curso", $idCurso)->delete();
-        Grade::where("id", $idCurso)->delete();
+        $curso = Grade::where("id", $idCurso)->first();
+        File::delete(public_path("images") . "/". $curso->img);
+        $curso->delete();
         return redirect()->back()->with("success", "Curso eliminado correctamente");
     }
 

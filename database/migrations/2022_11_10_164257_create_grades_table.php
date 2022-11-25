@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("Objetivos",500)->nullable(false);
             $table->boolean("Estado")->default(1);
             $table->integer("id_profesor");
+            $table->string("img",100)->nullable(true);
             $table->timestamps();
         });
     }

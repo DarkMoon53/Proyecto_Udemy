@@ -8,29 +8,35 @@
 
         <div class="row">
             <div class="col-sm-5 mx-auto">
-                
+
                 @if (Session::get('success'))
                 <div class="alert alert-primary" role="alert">
                     {{ Session::get('success') }}
                 </div>
                 @endif
 
-                <form action="{{route('profesor.procesarEditar_curso')}}" method="post">
+                <form action="{{route('profesor.procesarEditar_curso')}}" method="post" enctype="multipart/form-data">
                     @method("put")
                     @csrf
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Categoria</label>
                         <select class="form-select" aria-label="Default select example" name="id_categoria">
                             @forelse ($categorias as $c)
-                                @if($c->id == $cursoCategoria->id_categoria)
-                                    <option value="{{$c->id}}" selected>{{$c->Nombre}}</option>
-                                @else
-                                    <option value="{{$c->id}}">{{$c->Nombre}}</option>
-                                @endif
+                            @if($c->id == $cursoCategoria->id_categoria)
+                            <option value="{{$c->id}}" selected>{{$c->Nombre}}</option>
+                            @else
+                            <option value="{{$c->id}}">{{$c->Nombre}}</option>
+                            @endif
                             @empty
                             <option value="">No hay Categorias</option>
                             @endforelse
                         </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">imagen</label></br>
+                        <img src="{{URL::asset("images/$curso->img")}}" alt="" width="200">
+                        <input type="file" class="form-control" id="exampleFormControlInput1" name="img" value="{{old('img')}}">
                     </div>
 
                     <div class="mb-3">
