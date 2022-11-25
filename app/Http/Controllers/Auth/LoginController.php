@@ -39,4 +39,12 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function credentials($request)
+    {
+        // Agregando una nueva condicion al inicio de sesión de laravel
+        return $request->only($this->username(), 'password') + [
+            'estado' => true
+        ];
+    }
 }
